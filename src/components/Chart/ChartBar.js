@@ -1,20 +1,23 @@
-import ChartBar from "./ChartBar";
+import "./ChartBar.css";
 
-import "./Chart.css";
+const ChartBar = (props) => {
+  let barFillHeight = "0%";
 
-const Chart = (props) => {
+  if (props.max > 0) {
+    barFillHeight = Math.round((props.value / props.maxValue) * 100) + "%";
+  }
+
   return (
-    <div className="chart">
-      {props.dataPoints.map((dataPoint) => (
-        <ChartBar
-          key={dataPoint.id}
-          value={dataPoint.value}
-          maxValue={null}
-          label={dataPoint.label}
-        />
-      ))}
+    <div className="chart-bar">
+      <div className="chart-bar__inner">
+        <div
+          className="chart-bar__fill"
+          style={{ height: barFillHeight }}
+        ></div>
+      </div>
+      <div className="chart-bar__label">{props.label}</div>
     </div>
   );
 };
 
-export default Chart;
+export default ChartBar;
